@@ -4,7 +4,7 @@ require 'rails/all'
 
 Bundler.require(*Rails.groups)
 
-module Rails5base
+module RailsStripe
   class Application < Rails::Application
     config.time_zone = 'Asia/Tokyo'
     config.i18n.available_locales = [:en, :ja]
