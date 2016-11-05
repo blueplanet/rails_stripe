@@ -19,6 +19,8 @@ gem 'font-awesome-rails'
 gem 'devise'
 gem 'devise-bootstrap-views'
 
+gem 'stripe'
+
 gem 'pg'
 gem 'config'
 
