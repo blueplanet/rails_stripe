@@ -4,7 +4,8 @@ class ChargesController < ApplicationController
   end
 
   def create
-    @change = current_user.charges.build charge_params
+    @charge = current_user.charges.build charge_params
+    
     customer = Stripe::Customer.create(
       email: current_user.email,
       source: params[:stripeToken]
@@ -16,6 +17,8 @@ class ChargesController < ApplicationController
       description: 'Rails stripe test',
       currency: 'jpy'
     )
+    @charge.data = charge.to_json
+    @charge.save!
   rescue Stripe::CardError => e
     flash[:error] = e.message
     redirect_to new_charge_path
@@ -24,6 +27,6 @@ class ChargesController < ApplicationController
   private
 
     def charge_params
-      params.reuqire(:charge).permit(:amount)
+      params.require(:charge).permit(:amount)
     end
 end

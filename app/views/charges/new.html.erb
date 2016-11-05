@@ -3,7 +3,17 @@
 <p>
   <h3>一回支払い</h3>
   <%= form_for @charge do |f| %>
-    <%= f.submit %>
+    <%= f.hidden_field :amount %>
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="<%= Settings.stripe.public_key %>"
+              data-email="<%= current_user.email %>"
+              data-name="〇〇ECサイト"
+              data-description="一回だけの支払い"
+              data-amount="<%= @charge.amount %>"
+              data-locale="ja"
+              data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+              data-label="一回払い">
+    </script>
   <% end %>
 </p>
 
