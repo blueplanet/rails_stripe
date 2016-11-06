@@ -8,12 +8,17 @@ class UsersController < ApplicationController
           source: params[:stripeToken]
         )
 
-        current_user.update stripe_customer_token: stripe_customer.id
+        card = stripe_customer.sources.data.find { |c| c.id == stripe_customer.default_source }
+
+        current_user.update(
+          stripe_customer_token: stripe_customer.id,
+          plan_id: params[:user][:plan_id],
+          card_brand: card.brand,
+          last4: card.last4,
+          exp_year: card.exp_year,
+          exp_month: card.exp_month
+        )
       end
-
-      
-
-      current_user.update user_params
     end
 
     redirect_to new_charge_path
