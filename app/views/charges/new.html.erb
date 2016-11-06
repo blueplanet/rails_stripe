@@ -28,7 +28,7 @@
         <div class="panel-body">
           <h4 class='text-center'>
             <label>
-              <%= f.radio_button :plan_id, plan.id %>
+              <%= f.radio_button :plan_id, plan.id, checked: current_user.plan_id == plan.id %>
               <%= number_with_delimiter plan.amount %> 円 / <%= plan.interval %>
             </label>
           </h4>
