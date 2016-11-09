@@ -13,6 +13,7 @@ class UsersController < ApplicationController
         current_user.update(
           stripe_customer_token: stripe_customer.id,
           plan_id: params[:user][:plan_id],
+          card_token: stripe_customer.default_source,
           card_brand: card.brand,
           last4: card.last4,
           exp_year: card.exp_year,
