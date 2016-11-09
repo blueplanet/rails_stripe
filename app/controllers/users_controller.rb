@@ -19,6 +19,12 @@ class UsersController < ApplicationController
           exp_year: card.exp_year,
           exp_month: card.exp_month
         )
+      else
+        stripe_customer = Stripe::Customer.retrieve(current_user.stripe_customer_token)
+        stripe_customer.plan = Plan.find(params[:user][:plan_id]).stripe_plan_id
+        stripe_customer.save
+
+        current_user.update plan_id: params[:user][:plan_id]
       end
     end
 
