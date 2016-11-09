@@ -20,6 +20,7 @@ gem 'devise'
 gem 'devise-bootstrap-views'
 
 gem 'stripe'
+gem 'stripe_event'
 
 gem 'pg'
 gem 'config'
